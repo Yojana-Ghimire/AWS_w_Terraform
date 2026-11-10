@@ -38,8 +38,8 @@ The architecture includes a public-facing application tier and a private databas
 | ALB | Receives and forwards HTTP/HTTPS requests to EC2 |
 | RDS | Managed database; not publicly accessible |
 | IAM | EC2 role and instance profile for AWS permissions/SSM |
-| CloudFront (optional) | CDN for content delivery |
-| Route 53 (optional) | DNS records and domain routing |
+| CloudFront  | CDN for content delivery |
+| Route 53  | DNS records and domain routing |
 
 ### Request Flow
 
