@@ -15,7 +15,7 @@ The architecture includes a public-facing application tier and a private databas
 - **Compute** – One EC2 instance deployed in a public subnet
 - **Load Balancing** – Application Load Balancer routes web traffic to EC2
 - **Database Integration** – One Amazon RDS instance deployed in private subnets
-- **CDN & DNS (Optional)** – CloudFront, ACM, and Route 53 for content delivery, HTTPS, and DNS
+- **CDN & DNS ** – CloudFront, ACM, and Route 53 for content delivery, HTTPS, and DNS
 - **Cost-conscious design** – No NAT Gateways, Elastic IPs, Auto Scaling Group, or WAF
 
 ---
@@ -39,7 +39,6 @@ The architecture includes a public-facing application tier and a private databas
 | RDS | Managed database; not publicly accessible |
 | IAM | EC2 role and instance profile for AWS permissions/SSM |
 | CloudFront (optional) | CDN for content delivery |
-| ACM (optional) | TLS certificates |
 | Route 53 (optional) | DNS records and domain routing |
 
 ### Request Flow
@@ -67,8 +66,8 @@ The architecture includes a public-facing application tier and a private databas
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR-REPOSITORY-URL>
-cd <YOUR-REPOSITORY-DIRECTORY>
+git clone <REPOSITORY-URL>
+cd <REPOSITORY-DIRECTORY>
 ```
 
 ### 2. Configure Variables
@@ -142,7 +141,7 @@ modules/
 ├── aws-ec2/
 ├── aws-rds/
 ├── alb-tg/
-└── aws-cloudfront-acm-route53/  # Optional
+└── aws-cloudfront-route53/  
 ```
 
 ---
@@ -168,10 +167,9 @@ modules/
 - **Amazon RDS** – One DB instance in a private subnet group spanning two AZs
 - **Database Access** – RDS security group allows inbound database traffic only from EC2's security group
 
-### 🔹 DNS & Content Delivery (Optional)
+### 🔹 DNS & Content Delivery 
 
 - **Amazon Route 53** – DNS management for a domain
-- **AWS Certificate Manager (ACM)** – SSL/TLS certificate for HTTPS
 - **Amazon CloudFront** – CDN and content caching
 
 ---
@@ -205,30 +203,4 @@ Check the AWS Pricing Calculator, Free Tier eligibility, and account credits. Se
 - Enable HTTPS with ACM when using a domain.
 - Review Terraform plans and AWS billing regularly.
 
----
 
-## 📚 Learning Objectives
-
-- Terraform modules and remote state
-- AWS VPC, subnets, route tables, and Internet Gateway
-- Security group design and least privilege
-- EC2, IAM roles, and instance profiles
-- ALB listeners, target groups, and health checks
-- Private RDS connectivity
-- Terraform lifecycle: init, plan, apply, and destroy
-- AWS cost and security awareness
-
----
-
-## 📌 Important Implementation Notes
-
-- The EC2 module should create **one `aws_instance`**, not an ASG or launch template.
-- The EC2 instance must be registered with the ALB target group.
-- RDS subnet groups should include private subnets in two AZs; one standard RDS instance itself runs in one AZ unless Multi-AZ is enabled.
-- Without NAT, private instances cannot download packages from the public internet unless using VPC endpoints, prebuilt AMIs, or another controlled solution.
-- Ensure actual module input names and outputs match the root configuration.
-- The S3 backend bucket must exist before `terraform init`; enable versioning and block public access.
-
----
-
-**Build. Deploy. Learn. 🚀**
