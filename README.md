@@ -1,4 +1,6 @@
 # AWS Two-Tier Architecture with Terraform
+<img width="490" height="383" alt="image" src="https://github.com/user-attachments/assets/c21e3773-ed32-445e-bfd3-f0f88e328006" />
+
 
 ## 📌 Overview
 
